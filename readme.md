@@ -17,11 +17,10 @@
 
 > Screenshots are located in the [`Preview/`](./Preview) folder of this repository.
 
-| Fastfetch | Terminal | Sublime Text |
+| Desktop | Terminal | Sublime Text |
 |:---------:|:--------:|:------------:|
-| ![Fastfetch preview](./Preview/fastfetch.png) | ![Terminal preview](./Preview/terminal.png) | ![Sublime preview](./Preview/sublime.png) |
+| ![Desktop preview](./Preview/1.png) | ![Terminal preview](./Preview/2.png) | ![Sublime preview](./Preview/3.png) |
 
-> *Replace placeholder paths above with your actual screenshot filenames from the `Preview/` directory.*
 
 ---
 
@@ -35,6 +34,7 @@ Dotfiles/
 ├── Terminals/          # Terminal emulator configurations
 ├── Themes/             # GTK / icon / cursor themes
 ├── Wallpaper/          # Wallpaper collection
+├── zshr/               # zshrc configuration
 └── Packages.txt        # Full list of installed packages
 ```
 
@@ -324,6 +324,6 @@ Under the following terms:
 
 <div align="center">
 
-*crafted with care · runs on caffeine and curiosity*
+*i use arch, btw.*
 
 </div>
