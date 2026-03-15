@@ -1,0 +1,73 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "display": {
+    "separator": " : "
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "custom",
+      "format": "  \u001b[90m  \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m "
+    },
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "custom",
+      "format": "  Jack Of All Trades, Master Of None"
+    },
+    {
+      "type": "custom",
+      "format": ""
+    },
+    {
+      "type": "os",
+      "key": "   OS",
+      "keyColor": "38;5;19"  // Dark Blue
+    },
+    {
+      "type": "kernel",
+      "key": "   Kernel",
+      "keyColor": "97"  // White
+    },
+    {
+      "type": "packages",
+      "key": "  󰏗 Packages",
+      "keyColor": "34"  // Keeping the same
+    },
+    {
+      "type": "wm",
+      "key": "   WM",
+      "keyColor": "38;5;81"  // Light Blue
+    },
+     {
+            "type": "command",
+            "key": "  󱦟 OS Age ",
+            "keyColor": "31",
+            "text": "birth_install=$(stat -c %W /); current=$(date +%s); time_progression=$((current - birth_install)); days_difference=$((time_progression / 86400)); echo $days_difference days"
+        },
+
+     {
+            "type": "uptime",
+            "key": "   Uptime",
+            "keyColor": "34",
+        },
+{
+  "type": "battery",
+  "key": "   Battery",
+  "keyColor": "38;5;228"  // Light Yellow
+},
+    {
+      "type": "custom",
+      "format": ""
+    },
+ {
+      "type": "custom",
+      "format": "  \u001b[90m  \u001b[31m  \u001b[32m  \u001b[33m  \u001b[34m  \u001b[35m  \u001b[36m  \u001b[37m "
+    }
+  ]
+}

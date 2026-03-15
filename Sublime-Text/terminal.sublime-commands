@@ -1,0 +1,16 @@
+[
+    {
+        "caption": "Terminal (panel)",
+        "command": "terminus_open",
+        "args": {
+            "cmd": ["zsh", "-l"],
+            "cwd": "${file_path:${project_path}}",
+            "title": "Terminal",
+            "panel_name": "Terminus",
+            "focus": true,
+            "env": {
+                "TERM": "xterm-256color"
+            }
+        }
+    }
+]

@@ -1,0 +1,17 @@
+[
+    { "keys": ["ctrl+p"], "command": "show_overlay", "args": {"overlay": "goto"} },
+    { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "find_in_files"} },
+    { "keys": ["alt+up"], "command": "swap_line_up" },
+    { "keys": ["alt+down"], "command": "swap_line_down" },
+    {
+    "keys": ["ctrl+shift+t"],
+    "command": "terminus_open",
+    "args": {
+        "cmd": ["zsh", "-l"],
+        "cwd": "${file_path:${project_path}}",
+        "panel_name": "Terminus",
+        "focus": true
+    }
+}
+
+]

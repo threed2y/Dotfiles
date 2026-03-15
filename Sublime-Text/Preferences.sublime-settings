@@ -1,0 +1,128 @@
+{
+	"theme": "Enki-Theme.sublime-theme",
+	"ignored_packages":
+	[
+    ],
+	"color_scheme": "Packages/Enki Theme/scheme/Enki-Aster.tmTheme",
+	"index_files": true,
+
+    "clients":{
+        "pyright":{
+            "enabled":true,
+            "settings":{
+                "python.analysis.inlayHints.variableTypes":true,
+                "python.analysis.inlayHints.functionReturnTypes":true,
+                "python.analysis.inlayHints.callArgumentNames":true,
+            },
+        },
+        "ruff":{
+            "enabled":true,
+        },
+    },
+
+    "lsp_show_diagnostics_panel": false,
+    "lsp_diagnostics_highlight_style": "underline",
+    "lsp_hover_popups": true,
+    "lsp_format_on_save": true,
+    "lsp_inlay_hints": true,
+    "lsp_inlay_hints_style": "subtle",
+    "lsp_inlay_hints_font_size": "smaller",
+    "lsp_inlay_hints_padding": 1,
+
+    "font_face": "JetBrainsMono Nerd Font Mono",
+    "font_size": 15,
+    "line_padding_top":2,
+    "line_padding_bottom":2,
+
+    "highlight_line": true,
+    "caret_style": "phase",
+    "caret_extra_width": 1,
+
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true,
+    "detect_indentation": true,
+
+    "auto_complete": true,
+    "auto_complete_delay": 50,
+    "auto_complete_commit_on_tab": true,
+
+    "scroll_past_end": true,
+    "word_wrap": false,
+
+    "draw_white_space": "selection",
+    "trim_trailing_white_space_on_save": true,
+    "ensure_newline_at_eof_on_save": true,
+
+    "show_minimap": false,
+    "bold_folder_labels": false,
+    "overlay_scroll_bars": "enabled",
+
+    "sidebar_tree_indent":12,
+    "sidebar_font_size":12,
+    "native_title_bar": false,
+    "gtk_title_bar": false,
+    "gtk_client_side_window_decorations": false,
+    "use_simple_full_screen": true,
+    "show_tabs": true,
+    "tabs_small": true,
+    "remember_full_screen": true,
+
+    "distraction_free": {
+    "menu_visible": false,
+    "tabs_visible": false,
+    "side_bar_visible": false,
+    "line_numbers": true,
+    },
+
+    "git_glutter_show_line_annotation": true,
+    "git_glutter_change_icon": "dot",
+    "git_glutter_add_icon": "plus",
+    "git_glutter_delete_icon": "minus",
+
+    "markdown_preview_on_save": true,
+
+    "show_status_in_status_bar": true,
+    "show_current_branch": true,
+    "enable_auto_fetch":true,
+    "auto_fetch_interval":300,
+
+    "confirm_force_push":true,
+    "confirm_discard_changes":true,
+
+    "show_panel_for": [],
+    "refresh_file_status": true,
+    "git_command": "/usr/bin/git",
+
+    "enki_theme_color_expanded_folder": true, // Set expanded folder in sidebar to accent color
+                                          // If no accent color is specified, it simply gets brighter
+    "enki_theme_bold_tab": true, // Bold tab labels
+    "enki_theme_compact_panel": true, // Compact panel
+    "enki_theme_compact_sidebar": true, // Compact side bar
+    "enki_theme_disable_fileicons": true, // Disable file icons
+    "enki_theme_disable_folder_animation": true, // Disable folder animation
+    "enki_theme_disable_tree_indicator": true, // Disable active file indicator
+    "enki_theme_panel_separator": true, // Panel Separator
+    "enki_theme_small_statusbar": true, // Smaller Status Bar
+    "enki_theme_small_tab": true, // Smaller tabs
+    "enki_theme_tabs_autowidth": true, // Automatically adjust width of tabs
+    "enki_theme_tabs_separator": true, // Add separator in between tabs
+    "enki_theme_tree_headings": false, // Show sidebar tree headings
+
+    "enki_theme_accent_pink": true,
+    "enki_theme_accent_cyan": false,
+
+    "enki_theme_accent_red": true, // or white for Light theme
+    /*"enki_theme_compact_sidebar": true,*/
+    /*"enki_theme_panel_separator": true,*/
+    /*"enki_theme_small_statusbar": true,*/
+    /*"enki_theme_small_tab": true,*/
+    /*"enki_theme_tabs_autowidth": true,*/
+    /*"enki_theme_tree_headings": false,*/
+
+    /*"overlay_scroll_bars": "enabled",*/
+    /*"line_padding_bottom": 2,*/
+    /*"line_padding_top": 2,*/
+    /*"bold_folder_labels": false,*/ // or remove this line if you set it to true for Material Theme
+    "always_show_minimap_viewport": true,
+    "indent_guide_options": ["draw_normal", "draw_active"],
+}

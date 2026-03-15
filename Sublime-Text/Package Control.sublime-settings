@@ -1,0 +1,26 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"A File Icon",
+		"BracketHighlighter",
+		"Catppuccin color schemes",
+		"Enki Theme",
+		"GitGutter",
+		"GitSavvy",
+		"Helium",
+		"LSP",
+		"LSP-pyright",
+		"LSP-ruff",
+		"Package Control",
+		"python-black",
+		"SideBarEnhancements",
+		"SideBarTools",
+		"SublimeLinter",
+		"Terminus",
+		"Theme - Cyanide",
+	],
+}
