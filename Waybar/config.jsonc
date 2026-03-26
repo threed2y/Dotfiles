@@ -4,6 +4,7 @@
     "modules-left":
     [
         "niri/workspaces",
+        "niri/window"
     ],
     "modules-center":
     [
@@ -21,6 +22,10 @@
         "battery"
     ],
 
+    "niri/window": {
+        "icon": true,
+        "icon-size":20
+    },
 
     "niri/workspaces": {
     "format": "{icon}",
