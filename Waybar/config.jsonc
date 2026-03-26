@@ -14,9 +14,7 @@
     [
         "idle_inhibitor",
         "pulseaudio#outputDevice",
-        "pulseaudio#inputDevice",
         "backlight",
-        "hyprland/language",
         "memory",
         "power-profiles-daemon",
         "battery"
@@ -87,15 +85,6 @@
         "on-click": "pavucontrol -t 3"
     },
 
-    "pulseaudio#inputDevice": {
-        "format": "{format_source}",
-        "format-source": " {volume}%",
-        "format-source-muted": "",
-        "tooltip-format": "{source_desc}",
-
-        "on-click": "pavucontrol -t 4"
-    },
-
     "network":
     {
         "format": "󱦳{bandwidthDownBytes} 󱦲{bandwidthUpBytes}",
@@ -136,12 +125,6 @@
         "󰃠"
             ],
             "interval": 1
-    },
-
-    "hyprland/language":
-    {
-        "format-en": "EN",
-        "format-ar": "AR"
     },
 
     "memory":
