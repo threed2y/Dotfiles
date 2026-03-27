@@ -1,0 +1,62 @@
+window {
+    font-family: "JetBrains Nerd Font Mono";
+    font-size: 1.5em;
+    background-color: rgba(28, 28, 28, 0.5);
+}
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    background-color: transparent;
+
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.3s ease-in;
+
+    /* Border */
+    border: 1.5px solid #DFC5A4;
+
+    /* Shape & spacing */
+    border-radius: 36px;
+    margin: 10px;
+    padding: 10px;
+
+    /* Default shadow */
+    box-shadow: 0 0 10px 2px transparent;
+}
+
+button:focus {
+    box-shadow: none;
+    background-size: 20%;
+
+    /* Keep border consistent */
+    border: 1.5px solid #DFC5A4;
+}
+
+button:hover {
+    background-size: 24%;
+
+    /* Glow effect */
+    box-shadow: 0 0 12px #DFC5A4;
+
+    color: transparent;
+    background-color: @color6;
+
+    border: 1.5px solid #DFC5A4;
+
+    transition: all 0.3s cubic-bezier(0.55, 0.0, 0.28, 1.682),
+                box-shadow 0.5s ease-in;
+}
+
+/* ICONS */
+#lock {
+    background-image: image(url("/home/ethan/.config/wlogout/icons/lock.png"));
+}
+
+#shutdown {
+    background-image: image(url("/home/ethan/.config/wlogout/icons/power.png"));
+}
+
+#reboot {
+    background-image: image(url("/home/ethan/.config/wlogout/icons/restart.png"));
+}

@@ -1,0 +1,18 @@
+{
+    "label" : "lock",
+    "action" : "Swaylock",
+    "keybind" : "l"
+}
+
+{
+    "label" : "shutdown",
+    "action" : "shutdown now",
+    "keybind" : "s"
+}
+
+{
+    "label" : "reboot",
+    "action" : "reboot",
+    "keybind" : "r"
+}
+
