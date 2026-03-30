@@ -1,20 +1,23 @@
 #waybar {
     background: rgba(40, 40, 40, 0.7);
-    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-family: "JetBrainsMono Nerd Font";
+    border-radius:0;
+    margin-right:6px;
+
 }
 
 #workspaces {
-    margin-left: 4px;
-    margin-right: 4px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 #workspaces button {
     margin-top: 2px;
     margin-bottom: 2px;
-    margin-left: 4px;
-    margin-right: 4px;
+    margin-left: 2px;
+    margin-right: 2px;
 
-    padding-right: 5px;
+    padding-right: 2px;
 
     color: #689d6a;
 }
@@ -135,20 +138,6 @@
     color: #d56d0e;
 }
 
-#language {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-right: 4px;
-    margin-left: 4px;
-
-    padding-right: 6px;
-    padding-left: 6px;
-
-    border-radius: 4px;
-
-    color: #d79932;
-}
-
 #memory {
     margin-top: 2px;
     margin-bottom: 2px;
@@ -234,4 +223,17 @@
 
 #battery.full {
     color: #bfff64;
+}
+
+#custom-power {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-right: 4px;
+    margin-left: 4px;
+
+    padding-right: 6px;
+    padding-left: 6px;
+
+    border-radius: 4px;
+
 }

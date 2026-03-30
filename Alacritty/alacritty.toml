@@ -1,0 +1,26 @@
+[font]
+size = 12
+
+[general]
+import = ["/home/ethan/.config/alacritty/kanagawa_wave.toml"]
+
+[window]
+opacity = 0.6
+
+[window.dimensions]
+columns = 100
+lines = 25
+
+[window.padding]
+x = 6
+y = 6
+
+[selection]
+save_to_clipboard = true
+
+[cursor]
+style = {shape = "Beam",blinking = "Off"}
+unfocused_hollow = true
+
+
+
