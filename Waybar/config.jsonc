@@ -4,7 +4,7 @@
     "modules-left":
     [
         "niri/workspaces",
-        "niri/window"
+	    "niri/window"
     ],
     "modules-center":
     [
@@ -12,33 +12,34 @@
     ],
     "modules-right":
     [
+        "custom/cava",
         "idle_inhibitor",
         "pulseaudio#outputDevice",
         "backlight",
         "memory",
         "power-profiles-daemon",
         "battery",
-        "custom/power"
+	"custom/power"
     ],
 
 
     "niri/workspaces": {
     "format": "{icon}",
     "format-icons": {
-    "1":"1",
-    "2":"2",
-    "3":"3",
+	"1":"1",
+	"2":"2",
+	"3":"3",
         "active": "",
         "default": ""
     },
     "persistent-workspaces":{
-    "eDP-1":[1,2,3]
-    }
+	"eDP-1":[1,2,3]
+	}
 },
-    "niri/window": {
+    "niri/window": {  
     "icon":true,
     "icon-size":20
-
+  
 },
 
 
@@ -47,6 +48,10 @@
         "icon-size": 21,
         "spacing": 10
     },
+"custom/cava": {
+	"format": "{}",
+	"exec": "/home/ethan/.config/waybar/cava.sh"
+},
 
     "idle_inhibitor": {
         "tooltip-format-activated": "Idle inhibitor active",
@@ -167,8 +172,8 @@
         }
     },
      "custom/power": {
-         "format" : "⏻",
-         "on-click": "wlogout",
+	     "format" : "⏻",
+	     "on-click": "wlogout",
          "tooltip": false
 
     },
