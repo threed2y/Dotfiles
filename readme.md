@@ -8,7 +8,6 @@
 [![Arch Linux](https://img.shields.io/badge/Arch-Linux-1793D1?style=flat-square&logo=arch-linux&logoColor=white)](https://archlinux.org/)
 [![Niri](https://img.shields.io/badge/Niri-Wayland%20Compositor-8be9fd?style=flat-square)](https://github.com/YaLTeR/niri)
 [![Waybar](https://img.shields.io/badge/Waybar-status%20bar-6272a4?style=flat-square)](https://github.com/Alexays/Waybar)
-[![Sublime Text](https://img.shields.io/badge/Sublime%20Text-config-orange?style=flat-square&logo=sublime-text&logoColor=white)](https://www.sublimetext.com/)
 
 </div>
 
@@ -18,9 +17,9 @@
 
 > Screenshots are located in the [`Preview/`](./Preview) folder.
 
-| Desktop | Overview | Terminal | Sublime Text |
+| Desktop | Overview | Terminal |
 |:---------:|:--------:|:--------:|:------------:|
-| ![Desktop preview](./Preview/1.png) | ![Overview preview](./Preview/2.png) | ![Terminal preview](./Preview/3.png) | ![Sublime preview](./Preview/4.png) |
+| ![Desktop preview](./Preview/1.png) | ![Overview preview](./Preview/2.png) | ![Terminal preview](./Preview/3.png) |
 
 ---
 
