@@ -17,9 +17,9 @@
 
 > Screenshots are located in the [`Preview/`](./Preview) folder.
 
-| Desktop | Overview | Terminal |
-|:---------:|:--------:|:--------:|:------------:|
-| ![Desktop preview](./Preview/1.png) | ![Overview preview](./Preview/2.png) | ![Terminal preview](./Preview/3.png) |
+ ![Desktop preview](./Preview/1.png)
+ ![Overview preview](./Preview/2.png) 
+ ![Terminal preview](./Preview/3.png) 
 
 ---
 
