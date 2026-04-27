@@ -117,6 +117,12 @@ layer-rule {
     match namespace="^wallpaper$"
     place-within-backdrop true
 }
+layer-rule {
+    match namespace="^waybar$"
+    background-effect {
+        blur true
+    }
+}
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -142,7 +148,7 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
-
+	    proportion 0.9
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
     }
@@ -169,10 +175,10 @@ layout {
     // You can change how the focus ring looks.
     focus-ring {
         // Uncomment this line to disable the focus ring.
-         // off
+        // off
 
         // How many logical pixels the ring extends out from the windows.
-        width 2
+        width 3
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
@@ -180,7 +186,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#DFC5A4"
+        active-color "#DCD7BA"
 
         // Color of the ring on inactive monitors.
         //
@@ -211,7 +217,7 @@ layout {
         off
 
         // width 4
-        // active-color "#ffc87f"
+        // active-color "#FFFEF7"
         // inactive-color "#505050"
 
         // Color of the border around windows that request your attention.
@@ -244,7 +250,7 @@ layout {
         // window. These will also remove client-side shadows if the window
         // draws any.
         //
-        // draw-behind-window false
+        draw-behind-window false
 
         // You can change how shadows look. The values below are in logical
         // pixels and match the CSS box-shadow properties.
@@ -280,14 +286,25 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
+environment{
+    XDG_CURRENT_DESKTOP "niri"
+}
+
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "waybar"
-spawn-at-startup "swaybg" "-i" "/home/ethan/Wallpapers/flower.jpg" "-m" "fill"
+spawn-at-startup "swaybg" "-i" "/home/ethan/Wallpapers/rockman.png" "-m" "fill"
 spawn-at-startup "mako"
 spawn-at-startup "swayidle" "-w" "timeout" "601" "niri msg action power-off-monitors" "timeout" "600" "swaylock -f" "before-sleep" "swaylock -f"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"
+spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal-gtk"
+spawn-at-startup "systemctl" "--user" "restart" "xdg-desktop-portal"
+
+
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:s
-// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+
 
 
 hotkey-overlay {
@@ -338,12 +355,16 @@ window-rule {
 // Floating Window Fix
 
 window-rule{
-    match app-id="foot"
+    match app-id="Alacritty"
     open-floating true
-    
-    default-column-width { proportion 0.33; }
-    default-window-height { proportion 0.5;}
-}
+    default-column-width { fixed 500; }
+    default-window-height { fixed 500;}
+    background-effect {
+	blur true 
+    }
+
+    }
+
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
@@ -351,6 +372,8 @@ window-rule {
     // - Flatpak Firefox (app-id is "org.mozilla.firefox")
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
+    default-column-width { fixed 500; }
+    default-window-height {fixed 500; }
 }
 
 // Example: block out two password managers from screen capture.
@@ -367,24 +390,42 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+window-rule {
     clip-to-geometry true
     draw-border-with-background false
-    geometry-corner-radius 6
+    geometry-corner-radius 10
 }
-
-window-rule {
-    match app-id="sift"
-    
-}
-
 window-rule {
     match app-id="win11-clipboard-history"
     open-floating true
-    
-    default-column-width { proportion 0.33; }
+    default-column-width { proportion 0.33;}
     default-window-height { proportion 0.5;}
+    opacity 0.9
+    background-effect {
+	blur true
+	}
 
+}
+window-rule {
+    match app-id="codium"
+    opacity 0.9
+    background-effect {
+	blur true
+	}
+}
+
+window-rule {
+    match app-id="firefox"
+    background-effect {
+    blur true
+    }
+}
+
+blur {
+    passes 3
+    offset 3
+    noise 0.02
+    saturation 1.5
 }
 binds {
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
@@ -402,11 +443,13 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     alt+space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+b hotkey-overlay-title="Run an application: Firefox" {spawn "firefox"; }
-    mod+f hotkey-overlay-title="run an application: PCManfm" {spawn "pcmanfm";}
-    mod+v hotkey-overlay-title="run an application: win11-clipboard-history" {spawn "win11-clipboard-history";}
+    mod+f hotkey-overlay-title="run an application: nautilus" {spawn "nautilus";}
+    mod+v {spawn "sh" "-c" "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy";}
+    mod+alt+l hotkey-overlay-title="Lock the Screen: swaylock" {spawn "swaylock"; }
+    mod+alt+space hotkey-overlay-title="Run wlogout: wlogout" {spawn "wlogout";}
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -638,7 +681,7 @@ binds {
     // a matching layout switch hotkey configured in xkb options above.
     // Having both at once on the same hotkey will break the switching,
     // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-    // Mod+Space       { switch-layout "next"; }
+    Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
     Print { screenshot; }
