@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+WALLDIR="$HOME/Wallpapers"
+
+wall=$(
+    find "$WALLDIR" -type f \
+        \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) \
+        | sed "s|$WALLDIR/||" \
+        | sort \
+        | fuzzel --dmenu --prompt "Wallpaper"
+)
+
+[[ -z "$wall" ]] && exit
+
+echo "Selected: $wall" >> /tmp/wallpaper-picker.log
+
+exec "$HOME/.local/bin/theme-switch" "$WALLDIR/$wall" >> /tmp/wallpaper-picker.log 2>&1

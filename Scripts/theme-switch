@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+wall="$(realpath "$1")"
+
+CURRENT="$HOME/.config/niri/current-wallpaper"
+
+####################################
+# Save wallpaper
+####################################
+
+echo "$wall" > "$CURRENT"
+
+####################################
+# Start daemon
+####################################
+
+if ! pgrep -x awww-daemon >/dev/null; then
+    awww-daemon >/dev/null 2>&1 &
+    sleep 0.5
+fi
+
+####################################
+# Wallpaper transition
+####################################
+
+awww img "$wall" \
+    --resize crop \
+    --transition-type grow \
+    --transition-duration 1.2 \
+    --transition-step 120 \
+    --transition-fps 60 \
+    --transition-pos 0.5,0.5
+
+####################################
+# Material You
+####################################
+
+matugen image "$wall" \
+    --mode dark \
+    --source-color-index 0
+
+####################################
+# Reload applications
+####################################
+
+if pgrep -x waybar >/dev/null; then
+    pkill -SIGUSR2 waybar
+fi
+
+if command -v makoctl >/dev/null; then
+    makoctl reload || true
+fi
+
+echo
+echo "✓ Theme applied"
+echo "✓ Wallpaper saved"
+echo "✓ Matugen regenerated"
