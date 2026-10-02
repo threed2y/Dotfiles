@@ -1,0 +1,30 @@
+@define-color background #0f1417;
+@define-color background-alt #1c2023;
+@define-color foreground #dfe3e7;
+
+@define-color primary #91cef4;
+@define-color on-primary #00344a;
+@define-color primary-container #004c6a;
+@define-color on-primary-container #c5e7ff;
+
+@define-color secondary #b6c9d8;
+@define-color on-secondary #20333e;
+@define-color secondary-container #374955;
+@define-color on-secondary-container #d2e5f4;
+
+@define-color tertiary #cbc1e9;
+@define-color on-tertiary #332c4c;
+@define-color tertiary-container #494263;
+@define-color on-tertiary-container #e7deff;
+
+@define-color error #ffb4ab;
+@define-color on-error #690005;
+@define-color error-container #93000a;
+@define-color on-error-container #ffdad6;
+
+@define-color outline #8b9297;
+@define-color surface-variant #41484d;
+@define-color on-surface-variant #c1c7ce;
+
+/* convenience alias used by some waybar module CSS */
+@define-color accent #91cef4;
