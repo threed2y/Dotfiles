@@ -22,5 +22,8 @@ save_to_clipboard = true
 style = {shape = "Beam",blinking = "Off"}
 unfocused_hollow = true
 
-
-
+# Every new window attaches to (or creates) the tmux session "main".
+# Remove this table to get a plain shell again.
+[terminal.shell]
+program = "/usr/bin/tmux"
+args = ["new-session", "-A", "-s", "main"]

@@ -1,0 +1,63 @@
+# ~/.config/starship.toml — classic bracketed prompt
+#   [ethan@arch octo] (main !2) $
+# Only named ANSI colors, so it recolors with Matugen via Alacritty's palette.
+# No Nerd Font needed.
+
+add_newline = false
+command_timeout = 800
+
+format = '''[\[](bright-black)$username[@](bright-black)$hostname $directory[\]](bright-black)$git_branch$git_status$python$cmd_duration $character'''
+
+[username]
+show_always = true
+style_user = "green"
+style_root = "bold red"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "green"
+format = "[$hostname]($style)"
+
+[directory]
+style = "blue"
+truncation_length = 1
+truncate_to_repo = false
+read_only = " ro"
+format = "[$path]($style)[$read_only]($read_only_style)"
+
+[git_branch]
+style = "purple"
+format = ' [\(](bright-black)[$branch]($style)'
+
+[git_status]
+style = "yellow"
+format = '([ $all_status$ahead_behind]($style))[\)](bright-black)'
+conflicted = "="
+ahead = "⇡"
+behind = "⇣"
+diverged = "⇕"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+[python]
+style = "bright-black"
+format = ' [\($virtualenv\)]($style)'
+pyenv_version_name = false
+detect_extensions = []
+detect_files = []
+detect_folders = []
+
+[cmd_duration]
+min_time = 3000
+style = "bright-black"
+format = ' [took $duration]($style)'
+
+[character]
+success_symbol = "[\\$](bright-black)"
+error_symbol = "[\\$](bold red)"
+vimcmd_symbol = "[:](bold yellow)"
