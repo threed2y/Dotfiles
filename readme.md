@@ -3,13 +3,15 @@
 # ✦ threed2y / Dotfiles ✦
 
 ### A curated, wallpaper-driven Arch Linux desktop
-**Niri · Waybar · Alacritty · Lite XL · Matugen · Everforest**
+**Niri · Waybar · Alacritty · tmux · Starship · Lite XL · Matugen · Everforest**
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightblue.svg?style=flat-square)](https://creativecommons.org/licenses/by/4.0/)
 [![Arch Linux](https://img.shields.io/badge/Arch-Linux-1793D1?style=flat-square&logo=arch-linux&logoColor=white)](https://archlinux.org/)
 [![Niri](https://img.shields.io/badge/Niri-Wayland%20Compositor-8be9fd?style=flat-square)](https://github.com/YaLTeR/niri)
 [![Waybar](https://img.shields.io/badge/Waybar-status%20bar-6272a4?style=flat-square)](https://github.com/Alexays/Waybar)
 [![Alacritty](https://img.shields.io/badge/Alacritty-terminal-f46d01?style=flat-square&logo=alacritty&logoColor=white)](https://alacritty.org/)
+[![tmux](https://img.shields.io/badge/tmux-multiplexer-1bb91f?style=flat-square&logo=tmux&logoColor=white)](https://github.com/tmux/tmux)
+[![Starship](https://img.shields.io/badge/Starship-prompt-dd0b78?style=flat-square&logo=starship&logoColor=white)](https://starship.rs/)
 [![Lite XL](https://img.shields.io/badge/Lite%20XL-editor-2a8aff?style=flat-square)](https://lite-xl.com/)
 [![Theme](https://img.shields.io/badge/Theme-Everforest-a7c080?style=flat-square)](https://github.com/sainnhe/everforest)
 
@@ -27,6 +29,7 @@
 - [How it fits together](#-how-it-fits-together)
 - [Repository layout](#-repository-layout)
 - [Keybindings](#️-keybindings)
+- [tmux cheat sheet](#-tmux-cheat-sheet)
 - [Installation](#-installation)
 - [Theming workflow](#-theming-workflow)
 - [Customization](#-customization)
@@ -53,6 +56,9 @@ Screenshots live in [`Preview/`](./Preview).
 - **Wallpaper-matched colors:** [`awww`](https://codeberg.org/LGFae/awww) switches wallpapers and [Matugen](https://github.com/InioX/matugen) generates a matching palette from them.
 - **Everforest** as the base theme, with Kanagawa Wave available for Alacritty.
 - **Alacritty** as the daily terminal, plus ready-made configs for Kitty, Ghostty (with GLSL shaders) and Foot.
+- **tmux, always on:** every new Alacritty window attaches to a `main` session, so closing a window never loses your work. Colors come from Matugen too.
+- **Native copy and paste inside tmux:** the mouse stays with Alacritty, so drag to select and `Ctrl+Shift+C` / `Ctrl+Shift+V` just work.
+- **Starship prompt** in a classic `[user@host dir] (branch) $` layout, drawn with your terminal's ANSI colors so it follows the wallpaper palette.
 - **Lite XL** as the code editor, fully reproducible from [`plugins.md`](./Code%20Editors/Lite-XL/plugins.md). A Sublime Text setup is included too.
 - **Keyboard-first workflow:** launcher, clipboard history, lock screen and power menu are all one chord away.
 - **One-shot restore:** `Packages.txt` lists every pacman and AUR package.
@@ -73,8 +79,10 @@ Screenshots live in [`Preview/`](./Preview).
 | **Logout menu** | [wlogout](https://github.com/ArtsyMacaw/wlogout) |
 | **Wallpaper** | [awww](https://codeberg.org/LGFae/awww) (animated wallpaper daemon) |
 | **Color generation** | [Matugen](https://github.com/InioX/matugen) (Material You palettes from the wallpaper) |
-| **Shell** | Zsh · Oh My Zsh · Powerlevel10k · autosuggestions · syntax highlighting |
+| **Shell** | Zsh · Oh My Zsh · autosuggestions · syntax highlighting · fzf-tab |
+| **Prompt** | [Starship](https://starship.rs/), classic bracketed layout, Matugen-aware colors |
 | **Primary terminal** | [Alacritty](https://alacritty.org/) |
+| **Multiplexer** | [tmux](https://github.com/tmux/tmux), auto-started by Alacritty, Matugen-themed |
 | **Other terminals** | Kitty, Ghostty (custom GLSL shaders), Foot |
 | **Primary editor** | [Lite XL](https://lite-xl.com/) |
 | **Secondary editor** | Sublime Text 4 (LSP, Pyright, Terminus) |
@@ -93,7 +101,7 @@ flowchart LR
     W[Wallpaper/] -->|awww img| D[Desktop wallpaper]
     W -->|matugen image| M[Matugen palette]
     M --> T[templates/]
-    T --> A[Waybar · fuzzel · mako · terminals · …]
+    T --> A[Waybar · fuzzel · mako · Alacritty · tmux · …]
     N[Niri] -->|spawn-at-startup| B[Waybar · mako · awww · cliphist]
     N -->|keybinds| L[Alacritty · fuzzel · swaylock · wlogout]
 ```
@@ -113,23 +121,25 @@ Dotfiles/
 ├── Fastfetch/            # Fastfetch preset
 ├── fuzzel/               # App launcher config
 ├── mako/                 # Notification daemon (config)
-├── Matugen/              # config.toml + templates/ (wallpaper-based theming)
+├── Matugen/              # config.toml + templates/ (Waybar, mako, Alacritty, tmux, …)
 ├── Niri/                 # Compositor config (config.kdl)
 ├── Preview/              # Screenshots used in this README
 ├── Scripts/              # Helper scripts
 ├── Swaylock/             # Lock screen config
 ├── Terminals/
-│   ├── Alacritty/        # alacritty.toml + kanagawa_wave.toml
+│   ├── Alacritty/        # alacritty.toml (starts tmux) + kanagawa_wave.toml
 │   ├── kitty/            # kitty.conf, theme.conf
 │   │   └── colors/       # Catppuccin · Gruvbox · TokyoNight · Everforest · Neon
 │   ├── Ghostty/          # Ghostty config
 │   │   └── shaders/      # GLSL shaders: snow, fireworks, matrix, spotlight, starfield…
-│   └── Foot/             # foot.ini
+│   ├── Foot/             # foot.ini
+│   ├── starship/         # starship.toml (classic bracketed prompt)
+│   └── tmux/             # tmux.conf (true color, native copy/paste, Matugen colors)
 ├── Themes/               # COSMIC .ron themes + Cosmictron icon pack
 ├── Wallpaper/            # Wallpaper collection
 ├── Waybar/               # config.jsonc + style.css
 ├── Wlogout/              # Logout/power menu layout and style
-├── zshr/                 # Zsh config (copy `zsh` to ~/.zshrc)
+├── zshr/                 # Zsh config (copy `zsh` to ~/.zshrc; Starship + fzf-tab)
 └── Packages.txt          # Pacman + AUR package list
 ```
 
@@ -153,6 +163,91 @@ Dotfiles/
 > Press `Mod + Shift + /` any time on a running session to see the full list straight from Niri.
 
 For clipboard history to work, a `wl-paste --watch cliphist store` entry must be running at startup. Check that it's present in `spawn-at-startup`.
+
+---
+
+## 🪟 tmux cheat sheet
+
+Alacritty starts tmux automatically (see [`alacritty.toml`](./Terminals/Alacritty/alacritty.toml)), so you are already inside a session called `main`. The prefix is the tmux default, `Ctrl` + `B`. Press the prefix, **release it**, then press the next key.
+
+### Panes: splitting and moving
+
+| Keys | Action |
+| --- | --- |
+| `Ctrl+B` `%` | Split into **left and right** panes |
+| `Ctrl+B` `"` | Split into **top and bottom** panes |
+| `Ctrl+B` `←` `→` `↑` `↓` | Move to the pane in that direction |
+| `Ctrl+B` `o` | Jump to the next pane |
+| `Ctrl+B` `;` | Jump back to the previous pane |
+| `Ctrl+B` `q` | Flash pane numbers, then press a number to jump there |
+| `Ctrl+B` `z` | Zoom the current pane to full screen, press again to restore |
+| `Ctrl+B` `x` | Close the current pane (asks to confirm) |
+| `Ctrl+B` `{` / `}` | Swap the pane with the previous / next one |
+| `Ctrl+B` `!` | Move the pane into its own window |
+| `Ctrl+B` `Space` | Cycle through preset layouts |
+| `Ctrl+B` `Alt+1` … `Alt+5` | Jump straight to a layout: even-horizontal, even-vertical, main-horizontal, main-vertical, tiled |
+
+Resize the current pane by holding `Ctrl+B`, then pressing `Ctrl+←/→/↑/↓` (1 cell, repeatable) or `Alt+←/→/↑/↓` (5 cells).
+
+### Windows (tabs)
+
+| Keys | Action |
+| --- | --- |
+| `Ctrl+B` `c` | New window |
+| `Ctrl+B` `n` / `p` | Next / previous window |
+| `Ctrl+B` `0` … `9` | Jump to window by number |
+| `Ctrl+B` `l` | Last used window |
+| `Ctrl+B` `,` | Rename the window |
+| `Ctrl+B` `w` | Pick a window or session from a tree |
+| `Ctrl+B` `&` | Close the window (asks to confirm) |
+
+### Sessions
+
+| Keys / command | Action |
+| --- | --- |
+| `Ctrl+B` `d` | Detach, leaving everything running |
+| `Ctrl+B` `s` | Pick a session from a list |
+| `Ctrl+B` `$` | Rename the session |
+| `Ctrl+B` `(` / `)` | Previous / next session |
+| `tmux ls` | List sessions from a normal shell |
+| `tmux attach -t main` | Re-attach to the `main` session |
+| `tmux new -s work` | Start another named session |
+| `tmux kill-session -t work` | Remove a session |
+
+### Copy, paste and scrolling
+
+The mouse is **not** captured by tmux, so Alacritty handles it natively:
+
+| Action | How |
+| --- | --- |
+| Copy | Drag with the mouse, then `Ctrl+Shift+C` |
+| Paste | `Ctrl+Shift+V` |
+
+Keyboard copy mode is configured with vi keys and copies to the Wayland clipboard through `wl-copy`:
+
+| Keys | Action |
+| --- | --- |
+| `Ctrl+B` `[` | Enter copy mode (also how you scroll back) |
+| `↑` `↓` `PgUp` `PgDn` or `h` `j` `k` `l` | Move around |
+| `Ctrl+U` / `Ctrl+D` | Half page up / down |
+| `g` / `G` | Top / bottom of the history |
+| `/` then `n` / `N` | Search forward, next / previous match |
+| `v` | Start selecting |
+| `y` | Copy the selection and leave copy mode |
+| `q` | Leave copy mode without copying |
+| `Ctrl+B` `]` | Paste tmux's own buffer |
+
+> The mouse wheel doesn't scroll tmux's history while mouse mode is off. Use copy mode, or see [Customization](#-customization) to turn mouse mode on.
+
+### Handy extras
+
+| Keys | Action |
+| --- | --- |
+| `Ctrl+B` `?` | List every key binding |
+| `Ctrl+B` `:` | Open the tmux command prompt |
+| `Ctrl+B` `t` | Show a big clock |
+
+Reload the config after editing it: `tmux source-file ~/.config/tmux/tmux.conf`.
 
 ---
 
@@ -211,6 +306,7 @@ If you'd rather install only the essentials:
 yay -S --needed \
   niri waybar alacritty fuzzel mako swaylock wlogout \
   awww matugen cliphist wl-clipboard \
+  tmux starship fzf zoxide \
   fastfetch zsh lite-xl firefox nautilus \
   greetd greetd-tuigreet nwg-look \
   ttf-jetbrains-mono-nerd ttf-firacode-nerd \
@@ -248,6 +344,25 @@ mkdir -p ~/.config/alacritty
 cp ~/Dotfiles/Terminals/Alacritty/*.toml ~/.config/alacritty/
 ```
 
+> `alacritty.toml` launches `tmux new-session -A -s main` instead of a bare shell. Check the path with `which tmux`, or delete the `[terminal.shell]` table at the bottom if you don't want tmux. The `[general] import` line uses an absolute path, so change `/home/ethan` to your own home.
+
+**tmux**
+
+```bash
+mkdir -p ~/.config/tmux
+cp ~/Dotfiles/Terminals/tmux/tmux.conf ~/.config/tmux/tmux.conf
+```
+
+tmux 3.2 or newer reads `~/.config/tmux/tmux.conf`. On older versions copy it to `~/.tmux.conf` instead. Colors arrive from Matugen as `~/.config/tmux/colors.conf` after the first run (see [Theming workflow](#-theming-workflow)).
+
+**Starship**
+
+```bash
+cp ~/Dotfiles/Terminals/starship/starship.toml ~/.config/starship.toml
+```
+
+The prompt needs no Nerd Font. It uses named ANSI colors only, so it follows Alacritty's palette.
+
 **Other terminals (optional)**
 
 ```bash
@@ -269,8 +384,8 @@ cp ~/Dotfiles/Terminals/Foot/foot.ini ~/.config/foot/
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+git clone --depth=1 https://github.com/Aloxaf/fzf-tab \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fzf-tab
 git clone https://github.com/zsh-users/zsh-autosuggestions \
   ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
@@ -282,6 +397,8 @@ chsh -s "$(which zsh)"
 ```
 
 > ⚠️ The bundled `.zshrc` sources a personal virtualenv (`~/Downloads/VENV/LA-311/bin/activate`). Delete that line or point it at your own environment.
+>
+> The prompt comes from Starship (`eval "$(starship init zsh)"` at the bottom), so `ZSH_THEME` is empty. `fzf-tab` must stay listed **before** `zsh-autosuggestions` and `zsh-syntax-highlighting` in `plugins=( ... )`. If you are migrating from Powerlevel10k, also delete any leftover `p10k` lines from your own `.zshrc`, otherwise the two prompts fight each other.
 
 **Lite XL (primary editor)**
 
@@ -356,6 +473,9 @@ Waybar, mako and the other helpers are launched from `spawn-at-startup` entries 
 - [ ] Waybar is visible and its modules (volume, network, battery) work
 - [ ] A notification appears: `notify-send "hello" "mako works"`
 - [ ] `fastfetch` prints with the custom preset
+- [ ] A new Alacritty window lands in tmux (`echo $TMUX` is not empty)
+- [ ] The prompt looks like `[user@host dir] (branch) $`
+- [ ] Drag-select text in tmux, `Ctrl+Shift+C`, then paste it elsewhere with `Ctrl+Shift+V`
 
 ---
 
@@ -375,6 +495,20 @@ Everything is built around one idea: **change the wallpaper, the desktop follows
 3. Matugen renders everything under `~/.config/matugen/templates/` using the rules in `config.toml`, writing colors for the apps you've templated.
 4. Reload the apps that don't pick up changes live (Waybar, mako, terminals).
 
+### tmux, Alacritty and the prompt
+
+- **Alacritty** reads `~/.config/alacritty/colors.toml`, generated from `Matugen/templates/alacritty-colors.toml`. It live-reloads when the file changes. Make sure `alacritty.toml` imports that file (not only the static Kanagawa one) to follow the wallpaper.
+- **tmux** reads `~/.config/tmux/colors.conf`, generated from `Matugen/templates/tmux-colors.conf`. It styles the status bar, window tabs, pane borders, messages and copy mode. The `post_hook` in `Matugen/config.toml` re-sources it into running sessions, and does nothing if tmux isn't running.
+- **Starship** needs no template. It only uses named ANSI colors (blue, purple, green…), so it recolors itself whenever Alacritty's palette changes.
+
+```toml
+# Matugen/config.toml
+[templates.tmux]
+input_path = './templates/tmux-colors.conf'
+output_path = '~/.config/tmux/colors.conf'
+post_hook = 'tmux source-file ~/.config/tmux/colors.conf 2>/dev/null || true'
+```
+
 Command names and flags can change between releases of `awww` and `matugen`. If one fails, check `awww --help` / `matugen --help`.
 
 > Everforest is the base look. Matugen-driven colors layer on top where templated.
@@ -383,7 +517,17 @@ Command names and flags can change between releases of `awww` and `matugen`. If 
 
 ## 🔧 Customization
 
-**Alacritty colors.** `alacritty.toml` imports a color file; `kanagawa_wave.toml` is included as an alternate palette. Swap the imported file to change schemes.
+**Alacritty colors.** `alacritty.toml` imports a color file. `kanagawa_wave.toml` is a fixed alternate palette. Point the import at `~/.config/alacritty/colors.toml` to use the Matugen-generated one instead.
+
+**tmux on startup.** The `[terminal.shell]` table at the bottom of `alacritty.toml` starts tmux. `args = ["new-session", "-A", "-s", "main"]` attaches every window to the same `main` session. Use `args = ["new-session"]` for an independent session per window, or delete the table for a plain shell. To open one plain shell without editing anything, run `alacritty -e zsh`.
+
+**tmux mouse mode.** Mouse mode is off so Alacritty's native selection works. To click panes, drag borders and scroll with the wheel, add `set -g mouse on` to `tmux.conf`. Hold `Shift` while dragging to select text natively again.
+
+**Starship layout.** Edit `~/.config/starship.toml`:
+
+- Show the full path: delete `truncation_length = 1` in `[directory]`.
+- Show git counts like `!2`: use `"!${count}"` style values in `[git_status]`.
+- Drop the host name: remove `@$hostname` from `format`.
 
 **Kitty colors.** Pick a scheme from `Terminals/kitty/colors/` (Catppuccin, Gruvbox, TokyoNight, Everforest, Neon) by editing the `include` line in `~/.config/kitty/theme.conf`.
 
@@ -410,9 +554,10 @@ Back up before overwriting:
 
 ```bash
 mkdir -p ~/config-backup
-cp -r ~/.config/{niri,waybar,fuzzel,mako,swaylock,wlogout,matugen,fastfetch,alacritty,lite-xl} \
+cp -r ~/.config/{niri,waybar,fuzzel,mako,swaylock,wlogout,matugen,fastfetch,alacritty,tmux,lite-xl} \
   ~/config-backup/ 2>/dev/null
 [ -f ~/.zshrc ] && cp ~/.zshrc ~/config-backup/.zshrc
+[ -f ~/.config/starship.toml ] && cp ~/.config/starship.toml ~/config-backup/
 ```
 
 Pull in new changes later:
@@ -444,6 +589,12 @@ pacman -Qqe > ~/Dotfiles/Packages.txt
 | Ghostty shader not animating | Confirm `custom-shader-animation = always` is set |
 | Fastfetch ignores the config | Run `fastfetch --config-help`; default path is `~/.config/fastfetch/config.jsonc` |
 | Zsh errors on startup | Remove the personal `source ~/Downloads/VENV/...` line from `~/.zshrc` |
+| Two prompts or a stale Powerlevel10k prompt | Remove leftover `p10k`, `POWERLEVEL9K` and `p10k-instant-prompt` lines from `~/.zshrc`, set `ZSH_THEME=""` |
+| Can't copy text in tmux | Mouse mode is probably on. Set `mouse off` in `tmux.conf`, or hold `Shift` while dragging. For keyboard copy, install `wl-clipboard` |
+| tmux colors look washed out | Start a fresh server (`tmux kill-server`, then reopen Alacritty) and check `echo $TERM` prints `tmux-256color` |
+| tmux colors don't change after Matugen runs | Confirm `~/.config/tmux/colors.conf` exists and `tmux.conf` has `source-file -q ~/.config/tmux/colors.conf`, then run `tmux source-file ~/.config/tmux/tmux.conf` |
+| Alacritty opens but tmux doesn't start | Check `which tmux` matches the `program` path in `alacritty.toml`; run `alacritty -e zsh` to get a shell and debug |
+| Tab completion looks plain | `fzf-tab` must be in `plugins=( ... )` before the autosuggestions and syntax-highlighting plugins, and `fzf` must be installed |
 | Icons not applying | Set the theme with `gsettings` or `nwg-look` |
 | `niri msg` fails | It only works inside a running Niri session |
 
@@ -460,6 +611,15 @@ Niri's scrollable layout means opening a window never resizes the others, and it
 **Do I need all four terminals?**
 No. Alacritty is the primary one. Kitty, Ghostty and Foot are extras you can skip.
 
+**Why run tmux inside Alacritty?**
+Alacritty has no tabs or splits of its own. tmux adds panes, windows and sessions that survive closing the terminal window.
+
+**Can I get the mouse back in tmux?**
+Yes, add `set -g mouse on` to `tmux.conf`. The trade-off is that you then hold `Shift` to select text with Alacritty's native selection.
+
+**Why Starship instead of Powerlevel10k?**
+Starship is one TOML file and uses the terminal's ANSI colors, so it follows the Matugen palette without extra templating.
+
 **Do I need both editors?**
 No. Lite XL is the daily driver; Sublime Text is optional.
 
@@ -474,7 +634,7 @@ Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). You're
 
 ## 🙏 Acknowledgements
 
-[Arch Linux](https://archlinux.org/) · [Niri](https://github.com/YaLTeR/niri) · [Waybar](https://github.com/Alexays/Waybar) · [Alacritty](https://alacritty.org/) · [Lite XL](https://lite-xl.com/) · [Matugen](https://github.com/InioX/matugen) · [awww](https://codeberg.org/LGFae/awww) · [Everforest](https://github.com/sainnhe/everforest) · [Oh My Zsh](https://ohmyz.sh/) · [Powerlevel10k](https://github.com/romkatv/powerlevel10k) · [Fastfetch](https://github.com/fastfetch-cli/fastfetch) · r/unixporn and the wider dotfiles community
+[Arch Linux](https://archlinux.org/) · [Niri](https://github.com/YaLTeR/niri) · [Waybar](https://github.com/Alexays/Waybar) · [Alacritty](https://alacritty.org/) · [Lite XL](https://lite-xl.com/) · [Matugen](https://github.com/InioX/matugen) · [awww](https://codeberg.org/LGFae/awww) · [Everforest](https://github.com/sainnhe/everforest) · [Oh My Zsh](https://ohmyz.sh/) · [tmux](https://github.com/tmux/tmux) · [Starship](https://starship.rs/) · [fzf-tab](https://github.com/Aloxaf/fzf-tab) · [Fastfetch](https://github.com/fastfetch-cli/fastfetch) · r/unixporn and the wider dotfiles community
 
 <div align="center">
 
