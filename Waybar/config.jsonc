@@ -1,183 +1,145 @@
 {
-    "Position": "top", 
+    "position": "top",
     "layer": "top",
-    "height": 30,
-    "margin-top": 5,
+    "height": 32,
+    "margin-top": 6,
     "margin-left": 12,
-    "margin-right":12,
 
-    "modules-left":
-    [
-        "niri/workspaces",
-	    "niri/window"
-    ],
-    "modules-center":
-    [
-        "clock"
-    ],
-    "modules-right":
-    [
-        "idle_inhibitor",
-        "pulseaudio#outputDevice",
-        "backlight",
-	    "network",
-        "memory",
-        "power-profiles-daemon",
-        "battery",
-	"custom/power"
-    ],
+    // Only one thing on the bar: the pill.
+    "modules-left": ["group/pill"],
 
+    // Slide-out pill. The first child (the handle) is always visible,
+    // everything after it slides open to the right on hover.
+    "group/pill": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 400,
+            "transition-left-to-right": true,
+            "children-class": "pill-child",
+            "click-to-reveal": false
+        },
+        "modules": [
+            "group/handle",
+            "mpris",
+            "pulseaudio#outputDevice",
+            "backlight",
+            "network",
+            "memory",
+            "power-profiles-daemon",
+            "idle_inhibitor",
+            "custom/power"
+        ]
+    },
+
+    // Collapsed view: workspaces, time, battery.
+    "group/handle": {
+        "orientation": "inherit",
+        "modules": ["niri/workspaces", "clock", "battery"]
+    },
 
     "niri/workspaces": {
-    "format": "{icon}",
-    "format-icons": {
-	"1":"1",
-	"2":"2",
-	"3":"3",
-        "active": "",
-        "default": ""
-    },
-    "persistent-workspaces":{
-	"eDP-1":[1,2,3]
-	}
-},
-    "niri/window": {  
-    "icon":true,
-    "icon-size":20
-  
-},
-
-    "tray":
-    {
-        "icon-size": 21,
-        "spacing": 10
-    },
-    "idle_inhibitor": {
-        "tooltip-format-activated": "Idle inhibitor active",
-        "tooltip-format-deactivated": "Idle inhibitor not active",
-        "format": "{icon}",
-        "format-icons": {
-            "activated": " ",
-            "deactivated": " ",
-        }
+        "format": "{index}",
+        "persistent-workspaces": { "eDP-1": [1, 2, 3] }
     },
 
-    "clock":
-    {
-        "format": "{:%A %H:%M:%S %d/%m/%Y}",
-        "interval": 1,
-        "tooltip": false
+    // Minimal now-playing line in the pill. Click it to drop down the full
+    // player (cover, progress, controls). Middle: play/pause, right: next.
+    // Hidden automatically when no player is running.
+    "mpris": {
+        "format": "\udb81\udc0a {title}",
+        "format-paused": "\udb80\udfe4 {title}",
+        "format-stopped": "",
+        "title-len": 22,
+        "status-icons": { "playing": "\udb81\udc0a", "paused": "\udb80\udfe4" },
+        "tooltip": false,
+        "on-click": "python3 $HOME/.config/waybar/scripts/mpris-popup.py",
+        "on-click-middle": "playerctl play-pause",
+        "on-click-right": "playerctl next"
     },
 
-    "pulseaudio#outputDevice":
-    {
-        "format": "{icon}  {volume}%",
-        "format-bluetooth": "{icon} 󰂰 {volume}%",
-        "format-muted": "󰖁",
-        "format-icons":
-        {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default":
-            [
-                "", "", "󰕾",  ""
-            ],
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "{:%A, %d %B %Y}\n<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "format": {
+                "months": "<b>{}</b>",
+                "weekdays": "<span alpha='55%'>{}</span>",
+                "today": "<b><u>{}</u></b>"
+            }
         },
-        "tooltip-format": "{desc}",
+        "interval": 30
+    },
 
+    "battery": {
+        "states": { "tooMuch": 100, "good": 80, "meh": 50, "warning": 30, "critical": 15 },
+        "format": "{icon} {capacity}%",
+        "format-charging": "\udb80\udc84 {capacity}%",
+        "format-plugged": "\udb85\ude16 {capacity}%",
+        "format-full": "{icon} Full",
+        "format-icons": ["\udb80\udc8e", "\udb80\udc7a", "\udb80\udc7b", "\udb80\udc7c", "\udb80\udc7d", "\udb80\udc7e", "\udb80\udc7f", "\udb80\udc80", "\udb80\udc81", "\udb80\udc82", "\udb80\udc79"],
+        "format-time": "{H}h {M}min",
+        "tooltip-format": "{timeTo}\n{power} W",
+        "interval": 20
+    },
+
+    "pulseaudio#outputDevice": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} \udb80\udcb0 {volume}%",
+        "format-muted": "\udb81\udd81",
+        "format-icons": {
+            "headphone": "\uf025",
+            "hands-free": "\uf590",
+            "headset": "\uf590",
+            "phone": "\uf095",
+            "portable": "\uf10b",
+            "car": "\uf1b9",
+            "default": ["\uf026", "\uf027", "\uf028"]
+        },
+        "tooltip-format": "{desc}\n{volume}%",
         "on-click": "pavucontrol -t 3"
     },
 
-    "cpu":
-    {
-        "format": " {usage}% ",
-        "interval": 1,
-    },
-
-    "backlight":
-    {
+    "backlight": {
         "format": "{icon} {percent}%",
-        "states":
-        {
-            "1": 86,
-            "2": 71,
-            "3": 56,
-            "4": 41,
-            "5": 26,
-            "6": 11,
-            "7": 0,
-        },
-        "format-icons":
-            [
-            "",
-        "",
-        "",
-        "󰃞",
-        "󰃝",
-        "󰃟",
-        "󰃠"
-            ],
-            "interval": 1
+        "states": { "1": 86, "2": 71, "3": 56, "4": 41, "5": 26, "6": 11, "7": 0 },
+        "format-icons": ["\udb80\udcda", "\udb80\udcdb", "\udb80\udcdc", "\udb80\udcdd", "\udb80\udcde", "\udb80\udcdf", "\udb80\udce0"],
+        "interval": 10
     },
+
     "network": {
-    "format-wifi": "  {ifname} ({signalStrength}%)"
-    },
-    "memory":
-    {
-        "format": " {percentage}%",
-        "tooltip-format": "Memory: {used}GiB/{total}GiB\nSwap: {swapUsed}GiB/{swapTotal}GiB",
-        "interval": 1
+        "format-wifi": "\uf1eb {signalStrength}%",
+        "tooltip-format-wifi": "{essid} · {frequency} GHz\n{ipaddr}",
+        "interval": 10
     },
 
-    "battery":
-    {
-        "states":
-        {
-            "tooMuch": 100,
-            "good": 80,
-            "meh": 50,
-            "warning": 30,
-            "critical": 15
-        },
-
-        "format": "{icon} {capacity}%",
-
-        "format-charging": " {capacity}%",
-        "format-plugged": "󱘖 {capacity}%",
-        "format-full": "{icon} Full",
-        "format-icons":
-        [
-            "󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
-        ],
-
-        "format-time": "{H}h {M}min",
-        "tooltip": true,
-        "tooltip-format": "{timeTo} {power}w",
-
-        "interval": 1
+    "memory": {
+        "format": "\udb80\udf5b {percentage}%",
+        "tooltip-format": "RAM   {used:0.1f} / {total:0.1f} GiB\nSwap  {swapUsed:0.1f} / {swapTotal:0.1f} GiB",
+        "interval": 5
     },
 
     "power-profiles-daemon": {
-        "format": "{icon} ",
-        "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-        "tooltip": true,
-        "format-icons":
-        {
-            "default": "",
-            "performance": "",
-            "balanced": "",
-            "power-saver": ""
+        "format": "{icon}",
+        "tooltip-format": "{profile}\n{driver}",
+        "format-icons": {
+            "default": "\udb83\udf85",
+            "performance": "\udb81\udcc5",
+            "balanced": "\udb83\udf85",
+            "power-saver": "\udb83\udf86"
         }
     },
-     "custom/power": {
-	     "format" : "⏻",
-	     "on-click": "wlogout",
-         "tooltip": false
 
+    "idle_inhibitor": {
+        "tooltip-format-activated": "Idle inhibitor on",
+        "tooltip-format-deactivated": "Idle inhibitor off",
+        "format": "{icon}",
+        "format-icons": { "activated": "\uf06e", "deactivated": "\uf070" }
     },
 
+    "custom/power": {
+        "format": "\u23fb",
+        "on-click": "wlogout",
+        "tooltip": false
+    }
 }

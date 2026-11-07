@@ -4,85 +4,108 @@
     border: none;
     border-radius: 0;
     font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 13px;
+    font-size: 12px;
     min-height: 0;
 }
 
-#waybar {
-    background: rgba(40, 40, 40, 0.7);
-    color: @foreground;
-}
-
-#waybar > .horizontal {
-  padding: 4px 10px;
-  border-radius: 12px;
-}
-
+/* The bar is invisible; only the pill is drawn */
 window#waybar {
-    background: alpha(@background, 0.7);
-    border: 1px solid @primary;
-    border-radius: 2px;
+    background: transparent;
     color: @foreground;
 }
 
-/* --- Workspaces --- */
+/* ── The pill ─────────────────────────────────────────────── */
+/* Translucent "frosted glass": soft tint + faint light edge.
+   With compositor blur enabled (see niri-blur.kdl) it becomes real glass.
+   Bar height is 32px (config.jsonc); vertical margins below are sized to it. */
+#pill {
+    background: alpha(@background, 0.6);
+    border: 1px solid alpha(@foreground, 0.14);
+    border-radius: 4px;
+    padding: 0 5px;
+    color: @foreground;
+    transition: border-color 0.3s ease;
+}
+
+#pill:hover {
+    border-color: alpha(@primary, 0.7);
+}
+
+/* ── Handle: workspaces · time · battery ──────────────────── */
 #workspaces {
-    margin: 0 4px;
+    margin: 0 3px 0 2px;
 }
 
 #workspaces button {
-    padding: 0 6px;
-    margin: 2px;
-    color: @secondary;
-    border-radius: 4px;
-    transition: color 0.2s ease;
+    min-width: 20px;
+    padding: 0 3px;
+    margin: 4px 2px;
+    color: @on-surface-variant;
+    background: transparent;
+    border-radius: 3px;
+    transition: color 0.2s ease, background 0.2s ease;
 }
 
-#workspaces button.active {
-    color: @accent;
+#workspaces button:hover {
+    background: alpha(@primary, 0.18);
+    color: @foreground;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+    color: @on-primary;
+    background: @primary;
 }
 
 #workspaces button.urgent {
-    color: @error;
+    color: @on-error;
+    background: @error;
 }
 
-/* --- Center Clock --- */
 #clock {
-    margin: 2px 4px;
-    padding: 0 10px;
+    margin: 6px 0;
+    padding: 0 9px;
+    border-left: 1px solid alpha(@outline, 0.35);
     color: @foreground;
 }
 
-/* --- Right Side Modules --- */
-#idle_inhibitor,
-#pulseaudio,
-#network,
-#cpu,
-#memory,
-#backlight,
-#power-profiles-daemon,
-#battery,
-#custom-power {
-    margin: 2px 4px;
+#battery {
+    margin: 6px 3px 6px 0;
     padding: 0 6px;
+    color: @foreground;
 }
 
-/* Module Colors (Gruvbox) */
-#idle_inhibitor {
-    color: @secondary;
+/* ── Zone: now playing (minimal; click opens the dropdown) ─ */
+#mpris {
+    margin: 6px 0 6px 3px;
+    padding: 0 10px;
+    border-left: 1px solid alpha(@outline, 0.35);
+    color: @foreground;
+    transition: color 0.2s ease;
 }
 
-#pulseaudio {
+#mpris:hover {
     color: @primary;
 }
 
-#network,
-#cpu {
-    color: @secondary;
+#mpris.paused {
+    color: @on-surface-variant;
 }
 
-#backlight {
-    color: @foreground;
+/* ── Zone: system (one calm colour, colour only for state) ── */
+#pulseaudio,
+#backlight,
+#network,
+#memory,
+#power-profiles-daemon,
+#idle_inhibitor {
+    margin: 6px 0;
+    padding: 0 7px;
+    color: @on-surface-variant;
+}
+
+#pulseaudio {
+    margin-left: 3px;
 }
 
 #backlight.4,
@@ -92,43 +115,45 @@ window#waybar {
     color: @tertiary;
 }
 
-#memory {
-    color: @primary;
-}
+#power-profiles-daemon.performance { color: @error; }
+#power-profiles-daemon.power-saver { color: @primary; }
 
-#power-profiles-daemon {
-    color: @secondary;
-}
-
-#power-profiles-daemon.performance {
+#custom-power {
+    margin: 6px 2px 6px 5px;
+    padding: 0 9px;
+    border-left: 1px solid alpha(@outline, 0.35);
     color: @error;
+    transition: color 0.2s ease;
 }
 
-#power-profiles-daemon.power-saver {
-    color: @primary;
+#custom-power:hover {
+    color: @on-error-container;
 }
 
-/* Battery States */
-#battery {
-    color: @foreground;
-}
-
+/* ── Battery states ───────────────────────────────────────── */
 #battery.good,
 #battery.tooMuch,
 #battery.meh,
-#battery.full {
-    color: @primary;
-}
-
-#battery.warning {
-    color: @tertiary;
-}
-
-#battery.critical {
-    color: @error;
-}
-
+#battery.full,
 #battery.charging,
 #battery.plugged {
     color: @primary;
+}
+
+#battery.warning  { color: @tertiary; }
+#battery.critical { color: @error; }
+
+/* ── Tooltips: same glass card as the pill and the dropdown ─ */
+/* Built on @background (like the pill) so it never depends on extra colour
+   names; a touch more opaque than the pill because text sits on it. */
+tooltip {
+    background: alpha(@background, 0.92);
+    border: 1px solid alpha(@primary, 0.35);
+    border-radius: 4px;
+}
+
+tooltip label {
+    color: @foreground;
+    font-size: 11px;
+    padding: 5px 8px;
 }
