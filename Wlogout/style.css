@@ -1,62 +1,124 @@
+/* wlogout: Matugen TEMPLATE (~/.config/matugen/templates/wlogout.css)
+   Every colour below comes from Matugen placeholders; nothing is hardcoded.
+   Matugen renders this to ~/.config/wlogout/style.css, so edit this
+   template, never the generated file.
+
+   Look: matches the Waybar pill and the MPRIS dropdown: translucent glass,
+   1px faint edge, 4px radius, one calm accent. */
+
+@define-color primary #a4d397;
+@define-color on-primary #0f380d;
+
+@define-color secondary #bbccb2;
+@define-color on-secondary #263422;
+
+@define-color tertiary #a0cfd3;
+@define-color on-tertiary #00363a;
+
+@define-color surface #11140f;
+@define-color on-surface #e0e4da;
+@define-color on-surface-variant #c2c8bc;
+
+@define-color background #11140f;
+
+@define-color outline #8c9387;
+
+/* ==========================================================
+ * Window
+ * ========================================================== */
+
 window {
-    font-family: "JetBrains Nerd Font Mono";
-    font-size: 1.5em;
-    background-color: rgba(28, 28, 28, 0.5);
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+
+    /* Dim transparent background */
+    background-color: alpha(@background, 0.45);
 }
+
+/* ==========================================================
+ * Buttons: the same glass tile as the pill
+ * ========================================================== */
 
 button {
+    color: @on-surface-variant;
+
+    background-color: alpha(@background, 0.6);
     background-repeat: no-repeat;
-    background-position: center;
-    background-size: 20%;
-    background-color: transparent;
+    background-position: center 42%;
+    background-size: 22%;
 
-    animation: gradient_f 20s ease-in infinite;
-    transition: all 0.3s ease-in;
+    border: 1px solid alpha(@on-surface, 0.14);
+    border-radius: 4px;
 
-    /* Border */
-    border: 1.5px solid #DFC5A4;
+    margin: 8px;
+    padding: 0;
 
-    /* Shape & spacing */
-    border-radius: 36px;
-    margin: 10px;
-    padding: 10px;
-
-    /* Default shadow */
-    box-shadow: 0 0 10px 2px transparent;
-}
-
-button:focus {
     box-shadow: none;
-    background-size: 20%;
+    outline: none;
 
-    /* Keep border consistent */
-    border: 1.5px solid #DFC5A4;
+    transition:
+        border-color 200ms ease-out,
+        background-color 200ms ease-out,
+        background-size 200ms ease-out,
+        color 200ms ease-out;
 }
 
-button:hover {
+/* ==========================================================
+ * Hover and keyboard focus look the same: a soft accent edge
+ * ========================================================== */
+
+button:hover,
+button:focus {
+    color: @on-surface;
+    background-color: alpha(@primary, 0.10);
+    border-color: alpha(@primary, 0.70);
     background-size: 24%;
-
-    /* Glow effect */
-    box-shadow: 0 0 12px #DFC5A4;
-
-    color: transparent;
-    background-color: @color6;
-
-    border: 1.5px solid #DFC5A4;
-
-    transition: all 0.3s cubic-bezier(0.55, 0.0, 0.28, 1.682),
-                box-shadow 0.5s ease-in;
 }
 
-/* ICONS */
+button:active {
+    color: @on-surface;
+    background-color: alpha(@primary, 0.20);
+    border-color: @primary;
+    transition-duration: 60ms;
+}
+
+/* ==========================================================
+ * Icons
+ * ========================================================== */
+
 #lock {
     background-image: image(url("/home/ethan/.config/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/home/ethan/.config/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/home/ethan/.config/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/home/ethan/.config/wlogout/icons/hibernate.png"));
+}
+
+#reboot {
+    background-image: image(url("/home/ethan/.config/wlogout/icons/restart.png"));
 }
 
 #shutdown {
     background-image: image(url("/home/ethan/.config/wlogout/icons/power.png"));
 }
 
-#reboot {
-    background-image: image(url("/home/ethan/.config/wlogout/icons/restart.png"));
+/* ==========================================================
+ * Labels
+ * ========================================================== */
+
+button label {
+    color: inherit;
+
+    font-size: 12px;
+    font-weight: normal;
+
+    margin-top: 8px;
 }

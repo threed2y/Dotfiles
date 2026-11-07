@@ -1,18 +1,41 @@
 {
     "label" : "lock",
-    "action" : "Swaylock",
+    "action" : "swaylock",
+    "text" : "Lock",
     "keybind" : "l"
 }
 
 {
-    "label" : "shutdown",
-    "action" : "shutdown now",
-    "keybind" : "s"
+    "label" : "logout",
+    "action" : "niri msg action quit --skip-confirmation",
+    "text" : "Logout",
+    "keybind" : "e"
+}
+
+{
+    "label" : "suspend",
+    "action" : "systemctl suspend",
+    "text" : "Suspend",
+    "keybind" : "u"
+}
+
+{
+    "label" : "hibernate",
+    "action" : "systemctl hibernate",
+    "text" : "Hibernate",
+    "keybind" : "h"
 }
 
 {
     "label" : "reboot",
     "action" : "reboot",
+    "text" : "Reboot",
     "keybind" : "r"
 }
 
+{
+    "label" : "shutdown",
+    "action" : "shutdown now",
+    "text" : "Shutdown",
+    "keybind" : "s"
+}
