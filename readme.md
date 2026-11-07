@@ -16,7 +16,7 @@ Change the wallpaper and the whole desktop follows. A minimal Wayland setup that
 
 | Desktop | Overview | Firefox |
 | :---: | :---: | :---: |
-| ![Desktop](./Preview/1.png) | ![Overview](./Preview/2.png) | ![Firefox](./Preview/3.png) |
+| ![Desktop](./Preview/desktop.png) | ![Overview](./Preview/overview.png) | ![Firefox](./Preview/firefox.png) |
 
 ## 🧰 What's inside
 
