@@ -24,6 +24,7 @@
             "pulseaudio#outputDevice",
             "backlight",
             "network",
+            "custom/cpu",
             "memory",
             "power-profiles-daemon",
             "idle_inhibitor",
@@ -111,6 +112,15 @@
         "format-wifi": "\uf1eb {signalStrength}%",
         "tooltip-format-wifi": "{essid} · {frequency} GHz\n{ipaddr}",
         "interval": 10
+    },
+
+    // Live CPU history as 8 block characters (last ~16s). The script stays
+    // running and prints one JSON line per sample, so there is no "interval".
+    "custom/cpu": {
+        "exec": "python3 $HOME/.config/waybar/scripts/cpu-spark.py",
+        "return-type": "json",
+        "format": "<span alpha='55%'>cpu</span> {}",
+        "tooltip": true
     },
 
     "memory": {

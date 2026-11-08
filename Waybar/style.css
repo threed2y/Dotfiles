@@ -96,6 +96,7 @@ window#waybar {
 #pulseaudio,
 #backlight,
 #network,
+#custom-cpu,
 #memory,
 #power-profiles-daemon,
 #idle_inhibitor {
@@ -114,6 +115,11 @@ window#waybar {
 #backlight.1 {
     color: @tertiary;
 }
+
+/* CPU sparkline: accent at rest, colour shifts only with load */
+#custom-cpu       { color: @primary; letter-spacing: 1px; }
+#custom-cpu.mid   { color: @tertiary; }
+#custom-cpu.high  { color: @error; }
 
 #power-profiles-daemon.performance { color: @error; }
 #power-profiles-daemon.power-saver { color: @primary; }
