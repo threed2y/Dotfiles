@@ -1,0 +1,6 @@
+[[language]]
+name = "python"
+language-servers = ["ty", "ruff"]
+auto-format = true
+formatter = { command = "ruff", args = ["format", "-"] }
+
